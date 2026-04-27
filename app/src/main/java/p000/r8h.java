@@ -1,0 +1,96 @@
+package p000;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import com.watchfun.callvideo.C4008R;
+
+/* JADX INFO: loaded from: classes6.dex */
+public final class r8h implements j8i {
+
+    /* JADX INFO: renamed from: a */
+    @efb
+    public final RelativeLayout f77401a;
+
+    /* JADX INFO: renamed from: b */
+    @efb
+    public final ImageView f77402b;
+
+    /* JADX INFO: renamed from: c */
+    @efb
+    public final LinearLayout f77403c;
+
+    /* JADX INFO: renamed from: d */
+    @efb
+    public final RelativeLayout f77404d;
+
+    /* JADX INFO: renamed from: e */
+    @efb
+    public final TextView f77405e;
+
+    /* JADX INFO: renamed from: f */
+    @efb
+    public final TextView f77406f;
+
+    /* JADX INFO: renamed from: m */
+    @efb
+    public final View f77407m;
+
+    private r8h(@efb RelativeLayout relativeLayout, @efb ImageView imageView, @efb LinearLayout linearLayout, @efb RelativeLayout relativeLayout2, @efb TextView textView, @efb TextView textView2, @efb View view) {
+        this.f77401a = relativeLayout;
+        this.f77402b = imageView;
+        this.f77403c = linearLayout;
+        this.f77404d = relativeLayout2;
+        this.f77405e = textView;
+        this.f77406f = textView2;
+        this.f77407m = view;
+    }
+
+    @efb
+    public static r8h bind(@efb View view) {
+        View viewFindViewById;
+        int i = C4008R.id.img_polygon;
+        ImageView imageView = (ImageView) view.findViewById(i);
+        if (imageView != null) {
+            i = C4008R.id.item_one;
+            LinearLayout linearLayout = (LinearLayout) view.findViewById(i);
+            if (linearLayout != null) {
+                RelativeLayout relativeLayout = (RelativeLayout) view;
+                i = C4008R.id.tv_content;
+                TextView textView = (TextView) view.findViewById(i);
+                if (textView != null) {
+                    i = C4008R.id.tv_translate;
+                    TextView textView2 = (TextView) view.findViewById(i);
+                    if (textView2 != null && (viewFindViewById = view.findViewById((i = C4008R.id.view_line))) != null) {
+                        return new r8h(relativeLayout, imageView, linearLayout, relativeLayout, textView, textView2, viewFindViewById);
+                    }
+                }
+            }
+        }
+        throw new NullPointerException("Missing required view with ID: ".concat(view.getResources().getResourceName(i)));
+    }
+
+    @efb
+    public static r8h inflate(@efb LayoutInflater layoutInflater) {
+        return inflate(layoutInflater, null, false);
+    }
+
+    @efb
+    public static r8h inflate(@efb LayoutInflater layoutInflater, @hib ViewGroup viewGroup, boolean z) {
+        View viewInflate = layoutInflater.inflate(C4008R.layout.trans_call_item_left, viewGroup, false);
+        if (z) {
+            viewGroup.addView(viewInflate);
+        }
+        return bind(viewInflate);
+    }
+
+    @Override // p000.j8i
+    @efb
+    public RelativeLayout getRoot() {
+        return this.f77401a;
+    }
+}

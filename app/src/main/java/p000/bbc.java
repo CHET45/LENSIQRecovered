@@ -1,0 +1,11 @@
+package p000;
+
+/* JADX INFO: loaded from: classes.dex */
+public interface bbc {
+    int getIndex();
+
+    @yfb
+    Object getKey();
+
+    int getOffset();
+}

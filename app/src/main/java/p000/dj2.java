@@ -1,0 +1,32 @@
+package p000;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/* JADX INFO: loaded from: classes4.dex */
+@Target({ElementType.TYPE})
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+public @interface dj2 {
+
+    /* JADX INFO: renamed from: dj2$a */
+    @Target({ElementType.TYPE})
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface InterfaceC4802a {
+    }
+
+    /* JADX INFO: renamed from: dj2$b */
+    @Target({ElementType.TYPE})
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface InterfaceC4803b {
+    }
+
+    Class<?>[] dependencies() default {};
+
+    Class<?>[] modules() default {};
+}

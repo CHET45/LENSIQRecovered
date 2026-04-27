@@ -1,0 +1,26 @@
+package p000;
+
+/* JADX INFO: loaded from: classes7.dex */
+public class k6b extends j6b {
+    public k6b(so8 so8Var, String str, String str2) {
+        super(xn1.NO_RECEIVER, ((u02) so8Var).getJClass(), str, str2, !(so8Var instanceof oo8) ? 1 : 0);
+    }
+
+    public Object get() {
+        return getGetter().call(new Object[0]);
+    }
+
+    public void set(Object obj) {
+        getSetter().call(obj);
+    }
+
+    @jjf(version = "1.4")
+    public k6b(Class cls, String str, String str2, int i) {
+        super(xn1.NO_RECEIVER, cls, str, str2, i);
+    }
+
+    @jjf(version = "1.4")
+    public k6b(Object obj, Class cls, String str, String str2, int i) {
+        super(obj, cls, str, str2, i);
+    }
+}

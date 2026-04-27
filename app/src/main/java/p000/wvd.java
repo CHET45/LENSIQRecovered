@@ -1,0 +1,36 @@
+package p000;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
+
+/* JADX INFO: loaded from: classes5.dex */
+@px4
+public final class wvd {
+    private wvd() {
+    }
+
+    public static String getPackageName(Class<?> clazz) {
+        return getPackageName(clazz.getName());
+    }
+
+    public static void initialize(Class<?>... classes) {
+        for (Class<?> cls : classes) {
+            try {
+                Class.forName(cls.getName(), true, cls.getClassLoader());
+            } catch (ClassNotFoundException e) {
+                throw new AssertionError(e);
+            }
+        }
+    }
+
+    public static <T> T newProxy(Class<T> interfaceType, InvocationHandler handler) {
+        v7d.checkNotNull(handler);
+        v7d.checkArgument(interfaceType.isInterface(), "%s is not an interface", interfaceType);
+        return interfaceType.cast(Proxy.newProxyInstance(interfaceType.getClassLoader(), new Class[]{interfaceType}, handler));
+    }
+
+    public static String getPackageName(String classFullName) {
+        int iLastIndexOf = classFullName.lastIndexOf(46);
+        return iLastIndexOf < 0 ? "" : classFullName.substring(0, iLastIndexOf);
+    }
+}

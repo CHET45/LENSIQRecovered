@@ -1,0 +1,156 @@
+package p000;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/* JADX INFO: loaded from: classes5.dex */
+@gd7
+@by4
+public final class u8g {
+    private u8g() {
+    }
+
+    @gdi
+    /* JADX INFO: renamed from: a */
+    public static boolean m23165a(CharSequence string, int index) {
+        return index >= 0 && index <= string.length() + (-2) && Character.isHighSurrogate(string.charAt(index)) && Character.isLowSurrogate(string.charAt(index + 1));
+    }
+
+    public static String commonPrefix(CharSequence a, CharSequence b) {
+        v7d.checkNotNull(a);
+        v7d.checkNotNull(b);
+        int iMin = Math.min(a.length(), b.length());
+        int i = 0;
+        while (i < iMin && a.charAt(i) == b.charAt(i)) {
+            i++;
+        }
+        int i2 = i - 1;
+        if (m23165a(a, i2) || m23165a(b, i2)) {
+            i--;
+        }
+        return a.subSequence(0, i).toString();
+    }
+
+    public static String commonSuffix(CharSequence a, CharSequence b) {
+        v7d.checkNotNull(a);
+        v7d.checkNotNull(b);
+        int iMin = Math.min(a.length(), b.length());
+        int i = 0;
+        while (i < iMin && a.charAt((a.length() - i) - 1) == b.charAt((b.length() - i) - 1)) {
+            i++;
+        }
+        if (m23165a(a, (a.length() - i) - 1) || m23165a(b, (b.length() - i) - 1)) {
+            i--;
+        }
+        return a.subSequence(a.length() - i, a.length()).toString();
+    }
+
+    @wx1
+    public static String emptyToNull(@wx1 String string) {
+        return rwc.m21589b(string);
+    }
+
+    public static boolean isNullOrEmpty(@wx1 String string) {
+        return rwc.m21595h(string);
+    }
+
+    public static String lenientFormat(@wx1 String template, @wx1 Object... args) {
+        int iIndexOf;
+        String strValueOf = String.valueOf(template);
+        int i = 0;
+        if (args == null) {
+            args = new Object[]{"(Object[])null"};
+        } else {
+            for (int i2 = 0; i2 < args.length; i2++) {
+                args[i2] = lenientToString(args[i2]);
+            }
+        }
+        StringBuilder sb = new StringBuilder(strValueOf.length() + (args.length * 16));
+        int i3 = 0;
+        while (i < args.length && (iIndexOf = strValueOf.indexOf("%s", i3)) != -1) {
+            sb.append((CharSequence) strValueOf, i3, iIndexOf);
+            sb.append(args[i]);
+            i3 = iIndexOf + 2;
+            i++;
+        }
+        sb.append((CharSequence) strValueOf, i3, strValueOf.length());
+        if (i < args.length) {
+            sb.append(" [");
+            sb.append(args[i]);
+            for (int i4 = i + 1; i4 < args.length; i4++) {
+                sb.append(", ");
+                sb.append(args[i4]);
+            }
+            sb.append(C4584d2.f28243l);
+        }
+        return sb.toString();
+    }
+
+    private static String lenientToString(@wx1 Object o) {
+        if (o == null) {
+            return "null";
+        }
+        try {
+            return o.toString();
+        } catch (Exception e) {
+            String str = o.getClass().getName() + '@' + Integer.toHexString(System.identityHashCode(o));
+            Logger.getLogger("com.google.common.base.Strings").log(Level.WARNING, "Exception during lenientFormat for " + str, (Throwable) e);
+            return "<" + str + " threw " + e.getClass().getName() + ">";
+        }
+    }
+
+    public static String nullToEmpty(@wx1 String string) {
+        return rwc.m21592e(string);
+    }
+
+    public static String padEnd(String string, int minLength, char padChar) {
+        v7d.checkNotNull(string);
+        if (string.length() >= minLength) {
+            return string;
+        }
+        StringBuilder sb = new StringBuilder(minLength);
+        sb.append(string);
+        for (int length = string.length(); length < minLength; length++) {
+            sb.append(padChar);
+        }
+        return sb.toString();
+    }
+
+    public static String padStart(String string, int minLength, char padChar) {
+        v7d.checkNotNull(string);
+        if (string.length() >= minLength) {
+            return string;
+        }
+        StringBuilder sb = new StringBuilder(minLength);
+        for (int length = string.length(); length < minLength; length++) {
+            sb.append(padChar);
+        }
+        sb.append(string);
+        return sb.toString();
+    }
+
+    public static String repeat(String string, int count) {
+        v7d.checkNotNull(string);
+        if (count <= 1) {
+            v7d.checkArgument(count >= 0, "invalid count: %s", count);
+            return count == 0 ? "" : string;
+        }
+        int length = string.length();
+        long j = ((long) length) * ((long) count);
+        int i = (int) j;
+        if (i != j) {
+            throw new ArrayIndexOutOfBoundsException("Required array size too large: " + j);
+        }
+        char[] cArr = new char[i];
+        string.getChars(0, length, cArr, 0);
+        while (true) {
+            int i2 = i - length;
+            if (length >= i2) {
+                System.arraycopy(cArr, 0, cArr, length, i2);
+                return new String(cArr);
+            }
+            System.arraycopy(cArr, 0, cArr, length, length);
+            length <<= 1;
+        }
+    }
+}

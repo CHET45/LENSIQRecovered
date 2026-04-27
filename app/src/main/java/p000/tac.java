@@ -1,0 +1,12 @@
+package p000;
+
+/* JADX INFO: loaded from: classes.dex */
+public final class tac {
+    public static final long packFloats(float f, float f2) {
+        return (((long) Float.floatToRawIntBits(f2)) & 4294967295L) | (Float.floatToRawIntBits(f) << 32);
+    }
+
+    public static final long packInts(int i, int i2) {
+        return (((long) i2) & 4294967295L) | (((long) i) << 32);
+    }
+}

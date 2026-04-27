@@ -1,0 +1,202 @@
+package p000;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.constraintlayout.widget.C0901d;
+import com.blankj.utilcode.util.C2473f;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.nio.CharBuffer;
+import p000.a77;
+
+/* JADX INFO: loaded from: classes.dex */
+@igg({"LogConditional"})
+public class vj3 {
+    public static void dumpLayoutParams(ViewGroup layout, String str) {
+        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[1];
+        String str2 = ".(" + stackTraceElement.getFileName() + g1i.f38277c + stackTraceElement.getLineNumber() + ") " + str + a77.C0077a.f542d;
+        int childCount = layout.getChildCount();
+        System.out.println(str + " children " + childCount);
+        for (int i = 0; i < childCount; i++) {
+            View childAt = layout.getChildAt(i);
+            System.out.println(str2 + "     " + getName(childAt));
+            ViewGroup.LayoutParams layoutParams = childAt.getLayoutParams();
+            Field[] fields = layoutParams.getClass().getFields();
+            for (int i2 = 0; i2 < fields.length; i2++) {
+                Field field = fields[i2];
+                try {
+                    Object obj = field.get(layoutParams);
+                    if (field.getName().contains("To") && !obj.toString().equals("-1")) {
+                        System.out.println(str2 + C0901d.f.f7286o + field.getName() + C2473f.f17566z + obj);
+                    }
+                } catch (IllegalAccessException unused) {
+                }
+            }
+        }
+    }
+
+    public static void dumpPoc(Object obj) {
+        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[1];
+        String str = ".(" + stackTraceElement.getFileName() + g1i.f38277c + stackTraceElement.getLineNumber() + c0b.f15434d;
+        Class<?> cls = obj.getClass();
+        System.out.println(str + "------------- " + cls.getName() + " --------------------");
+        for (Field field : cls.getFields()) {
+            try {
+                Object obj2 = field.get(obj);
+                if (field.getName().startsWith("layout_constraint") && ((!(obj2 instanceof Integer) || !obj2.toString().equals("-1")) && ((!(obj2 instanceof Integer) || !obj2.toString().equals(a43.f347l)) && ((!(obj2 instanceof Float) || !obj2.toString().equals("1.0")) && (!(obj2 instanceof Float) || !obj2.toString().equals("0.5")))))) {
+                    System.out.println(str + pl8.f71328a + field.getName() + C2473f.f17566z + obj2);
+                }
+            } catch (IllegalAccessException unused) {
+            }
+        }
+        System.out.println(str + "------------- " + cls.getSimpleName() + " --------------------");
+    }
+
+    public static String getActionType(MotionEvent event) {
+        int action = event.getAction();
+        for (Field field : MotionEvent.class.getFields()) {
+            try {
+                if (Modifier.isStatic(field.getModifiers()) && field.getType().equals(Integer.TYPE) && field.getInt(null) == action) {
+                    return field.getName();
+                }
+            } catch (IllegalAccessException unused) {
+            }
+        }
+        return "---";
+    }
+
+    public static String getCallFrom(int n) {
+        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[n + 2];
+        return ".(" + stackTraceElement.getFileName() + g1i.f38277c + stackTraceElement.getLineNumber() + c0b.f15434d;
+    }
+
+    public static String getLoc() {
+        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[1];
+        return ".(" + stackTraceElement.getFileName() + g1i.f38277c + stackTraceElement.getLineNumber() + ") " + stackTraceElement.getMethodName() + "()";
+    }
+
+    public static String getLocation() {
+        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[1];
+        return ".(" + stackTraceElement.getFileName() + g1i.f38277c + stackTraceElement.getLineNumber() + c0b.f15434d;
+    }
+
+    public static String getLocation2() {
+        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[2];
+        return ".(" + stackTraceElement.getFileName() + g1i.f38277c + stackTraceElement.getLineNumber() + c0b.f15434d;
+    }
+
+    public static String getName(View view) {
+        try {
+            return view.getContext().getResources().getResourceEntryName(view.getId());
+        } catch (Exception unused) {
+            return "UNKNOWN";
+        }
+    }
+
+    public static String getState(MotionLayout layout, int stateId) {
+        return getState(layout, stateId, -1);
+    }
+
+    public static void logStack(String tag, String msg, int n) {
+        StackTraceElement[] stackTrace = new Throwable().getStackTrace();
+        int iMin = Math.min(n, stackTrace.length - 1);
+        String str = C2473f.f17566z;
+        for (int i = 1; i <= iMin; i++) {
+            StackTraceElement stackTraceElement = stackTrace[i];
+            String str2 = ".(" + stackTrace[i].getFileName() + g1i.f38277c + stackTrace[i].getLineNumber() + ") " + stackTrace[i].getMethodName();
+            str = str + C2473f.f17566z;
+            StringBuilder sb = new StringBuilder();
+            sb.append(msg);
+            sb.append(str);
+            sb.append(str2);
+            sb.append(str);
+        }
+    }
+
+    public static void printStack(String msg, int n) {
+        StackTraceElement[] stackTrace = new Throwable().getStackTrace();
+        int iMin = Math.min(n, stackTrace.length - 1);
+        String str = C2473f.f17566z;
+        for (int i = 1; i <= iMin; i++) {
+            StackTraceElement stackTraceElement = stackTrace[i];
+            String str2 = ".(" + stackTrace[i].getFileName() + g1i.f38277c + stackTrace[i].getLineNumber() + ") ";
+            str = str + C2473f.f17566z;
+            System.out.println(msg + str + str2 + str);
+        }
+    }
+
+    public static String getState(MotionLayout layout, int stateId, int len) {
+        int length;
+        if (stateId == -1) {
+            return "UNDEFINED";
+        }
+        String resourceEntryName = layout.getContext().getResources().getResourceEntryName(stateId);
+        if (len == -1) {
+            return resourceEntryName;
+        }
+        if (resourceEntryName.length() > len) {
+            resourceEntryName = resourceEntryName.replaceAll("([^_])[aeiou]+", "$1");
+        }
+        if (resourceEntryName.length() <= len || (length = resourceEntryName.replaceAll("[^_]", "").length()) <= 0) {
+            return resourceEntryName;
+        }
+        return resourceEntryName.replaceAll(CharBuffer.allocate((resourceEntryName.length() - len) / length).toString().replace((char) 0, a18.f100c) + p43.f69617m, p43.f69617m);
+    }
+
+    public static String getName(Context context, int id) {
+        if (id != -1) {
+            try {
+                return context.getResources().getResourceEntryName(id);
+            } catch (Exception unused) {
+                return "?" + id;
+            }
+        }
+        return "UNKNOWN";
+    }
+
+    public static String getName(Context context, int[] id) {
+        String resourceEntryName;
+        try {
+            String str = id.length + "[";
+            int i = 0;
+            while (i < id.length) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(str);
+                sb.append(i == 0 ? "" : C2473f.f17566z);
+                String string = sb.toString();
+                try {
+                    resourceEntryName = context.getResources().getResourceEntryName(id[i]);
+                } catch (Resources.NotFoundException unused) {
+                    resourceEntryName = "? " + id[i] + C2473f.f17566z;
+                }
+                str = string + resourceEntryName;
+                i++;
+            }
+            return str + "]";
+        } catch (Exception e) {
+            e.toString();
+            return "UNKNOWN";
+        }
+    }
+
+    public static void dumpLayoutParams(ViewGroup.LayoutParams param, String str) {
+        StackTraceElement stackTraceElement = new Throwable().getStackTrace()[1];
+        String str2 = ".(" + stackTraceElement.getFileName() + g1i.f38277c + stackTraceElement.getLineNumber() + ") " + str + a77.C0077a.f542d;
+        System.out.println(" >>>>>>>>>>>>>>>>>>. dump " + str2 + a77.C0077a.f542d + param.getClass().getName());
+        for (Field field : param.getClass().getFields()) {
+            try {
+                Object obj = field.get(param);
+                String name = field.getName();
+                if (name.contains("To") && !obj.toString().equals("-1")) {
+                    System.out.println(str2 + C0901d.f.f7286o + name + C2473f.f17566z + obj);
+                }
+            } catch (IllegalAccessException unused) {
+            }
+        }
+        System.out.println(" <<<<<<<<<<<<<<<<< dump " + str2);
+    }
+}

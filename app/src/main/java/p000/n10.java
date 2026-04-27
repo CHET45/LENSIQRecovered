@@ -1,0 +1,38 @@
+package p000;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+/* JADX INFO: loaded from: classes5.dex */
+public class n10 {
+    /* JADX INFO: renamed from: a */
+    public static Object m17718a(Method method, Object obj, Object... objArr) {
+        try {
+            return method.invoke(obj, objArr);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e2) {
+            throw new RuntimeException(e2);
+        }
+    }
+
+    /* JADX INFO: renamed from: b */
+    public static <T> T m17719b(Constructor<T> constructor) {
+        try {
+            return constructor.newInstance(null);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e2) {
+            throw new RuntimeException(e2);
+        } catch (InvocationTargetException e3) {
+            throw new RuntimeException(e3);
+        }
+    }
+
+    public static AssertionError newAssertionError(String str, Throwable th) {
+        AssertionError assertionError = new AssertionError(str);
+        assertionError.initCause(th);
+        return assertionError;
+    }
+}

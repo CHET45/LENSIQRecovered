@@ -1,0 +1,17 @@
+package p000;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/* JADX INFO: loaded from: classes8.dex */
+@Target({ElementType.TYPE_USE})
+@afg({zc7.class})
+@dng({pmh.RECEIVER, pmh.PARAMETER, pmh.RETURN})
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+public @interface tc7 {
+    int value() default -1;
+}

@@ -1,0 +1,11 @@
+package p000;
+
+import android.view.animation.Interpolator;
+
+/* JADX INFO: loaded from: classes.dex */
+public abstract class nza implements Interpolator {
+    @Override // android.animation.TimeInterpolator
+    public abstract float getInterpolation(float v);
+
+    public abstract float getVelocity();
+}

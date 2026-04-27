@@ -1,0 +1,42 @@
+package p000;
+
+import java.util.concurrent.atomic.AtomicReferenceArray;
+
+/* JADX INFO: loaded from: classes7.dex */
+public final class n5e<T> {
+
+    @yfb
+    private volatile AtomicReferenceArray<T> array;
+
+    public n5e(int i) {
+        this.array = new AtomicReferenceArray<>(i);
+    }
+
+    public final int currentLength() {
+        return this.array.length();
+    }
+
+    @gib
+    public final T get(int i) {
+        AtomicReferenceArray<T> atomicReferenceArray = this.array;
+        if (i < atomicReferenceArray.length()) {
+            return atomicReferenceArray.get(i);
+        }
+        return null;
+    }
+
+    public final void setSynchronized(int i, @gib T t) {
+        AtomicReferenceArray<T> atomicReferenceArray = this.array;
+        int length = atomicReferenceArray.length();
+        if (i < length) {
+            atomicReferenceArray.set(i, t);
+            return;
+        }
+        AtomicReferenceArray<T> atomicReferenceArray2 = new AtomicReferenceArray<>(kpd.coerceAtLeast(i + 1, length * 2));
+        for (int i2 = 0; i2 < length; i2++) {
+            atomicReferenceArray2.set(i2, atomicReferenceArray.get(i2));
+        }
+        atomicReferenceArray2.set(i, t);
+        this.array = atomicReferenceArray2;
+    }
+}
