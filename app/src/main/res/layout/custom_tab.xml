@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@drawable/tab_background_selector"
+    android:layout_width="wrap_content"
+    android:layout_height="48dp">
+    <TextView
+        android:textSize="16sp"
+        android:textColor="@drawable/tab_btn_text_selector"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/tab_text"
+        android:padding="@dimen/dp_10"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:singleLine="true"/>
+</LinearLayout>

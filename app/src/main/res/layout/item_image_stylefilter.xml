@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/ll_yuantu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/rl_yuantu_check"
+            android:background="@drawable/border_ffffff_1_corner_12"
+            android:layout_width="@dimen/dp_54"
+            android:layout_height="@dimen/dp_54">
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/dp_48"
+                android:layout_height="@dimen/dp_48"
+                android:layout_centerInParent="true"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="@dimen/dp_8">
+                <ImageView
+                    android:id="@+id/iv_yuantu"
+                    android:layout_width="@dimen/dp_48"
+                    android:layout_height="@dimen/dp_48"
+                    android:scaleType="centerCrop"/>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+        <TextView
+            android:textSize="@dimen/text_10sp"
+            android:textColor="@color/t_ecf3f3"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/tv_yuantu_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/original_image"/>
+    </LinearLayout>
+</LinearLayout>

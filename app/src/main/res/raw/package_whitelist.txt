@@ -1,0 +1,15 @@
+# Package Whitelist for WQ FFmpeg Style Filter SDK
+# Only apps with package names listed here can use this SDK
+# Supports wildcard patterns using * (e.g., cn.watchfun.*)
+# Lines starting with # are comments
+
+# Demo app
+cn.watchfun.android_use_cpp_demo1
+
+# Company domain wildcard
+cn.watchfun.*
+
+# Other authorized apps
+com.eyevue.glassapp
+com.genimiro.aiapp
+com.lumaview.app

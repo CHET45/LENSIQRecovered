@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:gravity="center"
+        android:id="@android:id/background"
+        android:height="@dimen/dp_6">
+        <shape>
+            <corners android:radius="6dp"/>
+            <solid android:color="#41444c"/>
+        </shape>
+    </item>
+    <item
+        android:gravity="center"
+        android:id="@android:id/progress"
+        android:height="@dimen/dp_6">
+        <clip>
+            <shape>
+                <corners android:radius="6dp"/>
+                <solid android:color="@color/ai_voice_note_record_detail_progress_color"/>
+            </shape>
+        </clip>
+    </item>
+</layer-list>

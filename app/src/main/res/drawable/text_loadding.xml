@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="false">
+    <item
+        android:duration="500"
+        android:drawable="@drawable/ic_ellipsis_0"/>
+    <item
+        android:duration="500"
+        android:drawable="@drawable/ic_ellipsis_1"/>
+    <item
+        android:duration="500"
+        android:drawable="@drawable/ic_ellipsis_2"/>
+    <item
+        android:duration="500"
+        android:drawable="@drawable/ic_ellipsis_3"/>
+    <item
+        android:duration="500"
+        android:drawable="@drawable/ic_ellipsis_0"/>
+    <item
+        android:duration="500"
+        android:drawable="@drawable/ic_ellipsis_1"/>
+    <item
+        android:duration="500"
+        android:drawable="@drawable/ic_ellipsis_2"/>
+    <item
+        android:duration="500"
+        android:drawable="@drawable/ic_ellipsis_3"/>
+</animation-list>

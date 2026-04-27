@@ -1,23 +1,536 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <application android:name=".LensIqApplication" android:theme="@style/AppTheme" android:label="LENSIQ Recovered" android:allowBackup="false">
-        <activity android:name=".ui.auth.LoginActivity" />
-        <activity android:name=".ui.translate.RealTimeTranslationActivity" />
-        <activity android:name=".ui.translate.TransChatFreelyActivity" />
-        <activity android:name=".ui.media.PreviewActivity" />
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.SplashActivity" android:exported="true">
-            <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="51"
+    android:versionName="1.0.51-gp"
+    android:compileSdkVersion="35"
+    android:compileSdkVersionCodename="15"
+    android:isSplitRequired="true"
+    android:requiredSplitTypes="base__abi,base__density"
+    android:splitTypes=""
+    package="com.eyevue.glassapp"
+    android:platformBuildVersionCode="35"
+    android:platformBuildVersionName="15">
+    <uses-sdk
+        android:minSdkVersion="28"
+        android:targetSdkVersion="35"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30"/>
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30"/>
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission
+        android:name="android.permission.NEARBY_WIFI_DEVICES"
+        android:usesPermissionFlags="neverForLocation"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN"/>
+        </intent>
+    </queries>
+    <uses-feature
+        android:name="android.hardware.wifi.direct"
+        android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+<!--    <permission-->
+<!--        android:name="com.eyevue.glassapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"-->
+<!--        android:protectionLevel="signature"/>-->
+    <uses-permission android:name="com.eyevue.glassapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.screen.landscape"
+        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="false"/>
+    <application
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_eyevue_launcher"
+        android:name="com.eyevue.glassapp.EyevueApplication"
+        android:allowBackup="true"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:extractNativeLibs="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_eyevue_launcher"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:requestLegacyExternalStorage="true"
+        android:dataExtractionRules="@xml/data_extraction_rules">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDWl9G0XlYSslc9sWXKfrz2-WIPXBMqeM0"/>
+        <activity
+            android:theme="@style/AppTheme"
+            android:name="com.eyevue.glassapp.view.splash.EyevueSplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
-        <service android:name=".service.DaemonService" android:exported="false" />
-        <service android:name=".service.AiAssistantService" android:exported="false" />
-        <service android:name=".service.AlarmService" android:exported="false" />
-        <receiver android:name=".service.AlarmReceiver" android:exported="false" />
+        <activity
+            android:theme="@style/AppTheme"
+            android:name="com.eyevue.glassapp.view.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:theme="@style/CustomCaptureTheme"
+            android:name="com.eyevue.glassapp.view.p008qr.EyevueQrCaptureActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.p008qr.EyevueBindDeviceActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.auth.EyevueLoginBySmsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.auth.EyevueVerificationSmsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.auth.EyevueLoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.auth.EyevueForgotPasswordActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.auth.EyevueRegisterActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.twoear.TransTwoEarAiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.freedomtalk.FreedomTalkActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.headsetmodel.TransAiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.transfreely.TransChatFreelyActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.aichat.ChatGptAiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.transphoto.PhotoTransActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.RecordActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.RecordDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.RecordEditDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.VoiceNoteActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.VoiceNoteActivityV2"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.feedback.EyevueFeedbackActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.feedback.EyevueSelectFeedbackTypeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.statement.EyevueStatementActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"
+            android:hardwareAccelerated="true"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.language.EyevueLanguageActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.about.EyevueAboutActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.setting.EyevueSettingActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.theme.EyevueThemeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.transcommon.selectlau.SelectTransActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.setting.EyevueDeviceSettingActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.photo.FullScreenImageActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.photo.FullScreenVideoActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.guidance.NewStudentGuideActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.setting.EyevueDeviceAboutActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.translate.simultaneous.RealTimeTranslationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.translate.transfreely.TransChatFreelyActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.translate.headsetmodel.TransAiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.translate.textmodel.EyevueTextTransActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.translate.text.TextTranslateActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.batterypermissions.EyevueBatteryPermissionsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.batterypermissions.EyevuePhoneListActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.batterypermissions.EyevuePhoneDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.setting.EyevueDeviceGestureActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.guidance.EyevueGuideActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.photo.EyevuePreviewActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.connect.EyevueDeviceListActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.setting.EyevueOtaActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.sound.EyevueQuickVolumeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.live.EyevueLiveActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.alarmclock.EyevueAlarmClockActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.alarmclock.EyevueAlarmClockSettingActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.eyevue.glassapp.view.guidance.EyevueVoiceAssistantActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <service
+            android:name="com.watchfun.voicenotes.manager.voicenotes.RecordingService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"
+            android:foregroundServiceType="microphone">
+            <intent-filter>
+                <action android:name="com.watchfun.voicenotes.manager.voicenotes.RecordingService"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.eyevue.glassapp.services.EyevueAiService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"
+            android:foregroundServiceType="location">
+            <intent-filter>
+                <action android:name="com.eyevue.glassapp.services.EyevueAiService"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.eyevue.glassapp.floatwindow.service.DaemonService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="location">
+            <intent-filter>
+                <action android:name="com.eyevue.glassapp.floatwindow.service.DaemonService"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.eyevue.glassapp.floatwindow.service.CancelNoticeService"
+            android:enabled="true"
+            android:exported="true"/>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:authorities="com.eyevue.glassapp.fileProvider"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+        <receiver
+            android:name="com.eyevue.glassapp.services.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"/>
+        <service
+            android:name="com.eyevue.glassapp.services.AlarmService"
+            android:exported="false"/>
+        <activity
+            android:name="com.watchfun.trans.translation.TransMachineRecordDetailActivity"
+            android:exported="false"/>
+        <activity
+            android:name="com.watchfun.trans.translation.TransMachineRecordActivity"
+            android:exported="false"/>
+        <activity
+            android:name="com.watchfun.trans.translation.TranslationMachineActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.transfreely.TransChatFreelyTouchActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.transfreely.TransChatFreelyTouchOfflineActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.translation.LuckyTranslationMachineActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.offline.OfflineLanguageActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.trans.tramslationpublic.TranslationMachinePublicActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <service
+            android:name="com.watchfun.trans.translation.ConvertIntentService"
+            android:exported="false"/>
+        <activity
+            android:name="com.watchfun.callvideo.activity.VideoChatActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.callvideo.activity.TransVideoActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.callvideo.activity.InviteCallActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.transphoto.BilingualTransActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.transphoto.PhotoBilingualTransActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.RecordActivityV2"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.CommonWebViewActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.VoiceNoteActivityV1"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.VoiceNoteRecordDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <activity
+            android:name="com.watchfun.voicenotes.VoiceNoteRecordEditDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="fontScale|density|screenSize|uiMode|orientation|keyboardHidden|locale"/>
+        <service
+            android:name="com.watchfun.voicenotes.RecordingService2"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"
+            android:foregroundServiceType="microphone">
+            <intent-filter>
+                <action android:name="com.watchfun.voicenotes.RecordingService2"/>
+            </intent-filter>
+        </service>
+        <activity
+            android:theme="@style/DraggableTranslucentTheme"
+            android:name="com.draggable.library.extension.ImagesViewerActivity"/>
     </application>
 </manifest>
