@@ -1199,7 +1199,7 @@
     <string name="string_auto">Auto</string>
     <string name="string_automatic">Automatic</string>
     <string name="string_background_permission_tip">Select your phone model and follow the guide to enable background whitelist</string>
-    <string name="string_battery_low_tip">Battery level below 50%. Please charge glasses before firmware upgrade.</string>
+    <string name="string_battery_low_tip" formatted="false">Battery level below 50%. Please charge glasses before firmware upgrade.</string>
     <string name="string_bind">Bind</string>
     <string name="string_bind_fail">Binding Failed</string>
     <string name="string_bind_fail_solution">View Solutions</string>
@@ -1260,7 +1260,7 @@
     <string name="string_eyevue_glasses">LENSIQ Glasses</string>
     <string name="string_eyevue_glasses_en">LENSIQ glasses</string>
     <string name="string_eyevue_import_media_hotspot_tip">To ensure stable import speed, please temporarily disable Personal Hotspot on your phone.</string>
-    <string name="string_eyevue_import_media_low_battery_tip">Glasses battery is below 15%. Please charge the glasses before importing files.</string>
+    <string name="string_eyevue_import_media_low_battery_tip" formatted="false">Glasses battery is below 15%. Please charge the glasses before importing files.</string>
     <string name="string_first_bind">First time use. Please go to [Authorization Page] to scan and complete authorization.</string>
     <string name="string_function">Translation Tool</string>
     <string name="string_gesture_recover">Restore Default Settings</string>
@@ -1336,7 +1336,7 @@
     <string name="string_play_again">Play Again</string>
     <string name="string_pleas_wear_glasses">Please Wear Glasses</string>
     <string name="string_please_attention">Please note:</string>
-    <string name="string_please_attention_tip">1. Confirm device battery level &gt;50%.\n2. Keep device connected during upgrade.\n3. Do not exit this page.\n4. Do not close the application</string>
+    <string name="string_please_attention_tip" formatted="false">1. Confirm device battery level &gt;50%.\n2. Keep device connected during upgrade.\n3. Do not exit this page.\n4. Do not close the application</string>
     <string name="string_please_correct_contact">Please enter valid contact information</string>
     <string name="string_please_ignore">Please ignore the Bluetooth device first</string>
     <string name="string_poor_network">Poor network Maybe Call delay </string>

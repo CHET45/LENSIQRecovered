@@ -2,14 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:versionCode="51"
     android:versionName="1.0.51-gp"
-    android:compileSdkVersion="35"
-    android:compileSdkVersionCodename="15"
-    android:isSplitRequired="true"
-    android:requiredSplitTypes="base__abi,base__density"
-    android:splitTypes=""
-    package="com.eyevue.glassapp"
-    android:platformBuildVersionCode="35"
-    android:platformBuildVersionName="15">
+    package="com.eyevue.glassapp">
     <uses-sdk
         android:minSdkVersion="28"
         android:targetSdkVersion="35"/>
@@ -108,9 +101,6 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:requestLegacyExternalStorage="true"
         android:dataExtractionRules="@xml/data_extraction_rules">
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false"/>
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false"/>
